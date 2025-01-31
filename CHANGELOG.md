@@ -1,3 +1,7 @@
+## 1.1.0
+- Upgraded to Flutter `3.24.0`
+- Upgraded depencencies
+
 ## 1.0.0
 - Fixed crashing issue on iOS 17.1 and up
 

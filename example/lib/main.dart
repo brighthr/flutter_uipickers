@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -41,7 +41,8 @@ class _MyAppState extends State<MyApp> {
                           onChanged: (val) {
                             setState(() {
                               selectedItem = val ?? 0;
-                              selectedDate = DateTime.now().add(Duration(days: selectedItem));
+                              selectedDate = DateTime.now()
+                                  .add(Duration(days: selectedItem));
                             });
                           })),
                   const SizedBox(height: 12),
@@ -60,7 +61,8 @@ class _MyAppState extends State<MyApp> {
                         onChanged: (date) {
                           setState(() {
                             selectedDate = date;
-                            selectedItem = daysBetween(DateTime.now(), selectedDate);
+                            selectedItem =
+                                daysBetween(DateTime.now(), selectedDate);
                           });
                         },
                       ))
