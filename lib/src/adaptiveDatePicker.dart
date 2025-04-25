@@ -35,6 +35,8 @@ class AdaptiveDatePicker extends StatelessWidget {
       this.tintColor,
       this.borderWidth,
       this.cornerRadius,
+      this.headerForegroundColor,
+      this.primaryColor,
       this.fontSize})
       : super(key: key);
 
@@ -52,6 +54,12 @@ class AdaptiveDatePicker extends StatelessWidget {
 
   /// Called when the user selects a date/time.
   final void Function(DateTime)? onChanged;
+
+  /// The color to use when painting the header and date picker.
+  final Color? primaryColor;
+
+  /// The color to use when painting the text in the header.
+  final Color? headerForegroundColor;
 
   /// The color to use when painting the text.
   final Color? textColor;
@@ -101,6 +109,9 @@ class AdaptiveDatePicker extends StatelessWidget {
       borderColor: borderColor,
       borderWidth: borderWidth,
       cornerRadius: cornerRadius,
+      headerBackgroundColor: primaryColor,
+      headerForegroundColor: headerForegroundColor,
+      primaryColor: primaryColor,
       fontSize: fontSize,
     );
   }

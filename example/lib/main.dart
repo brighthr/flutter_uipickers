@@ -52,8 +52,9 @@ class _MyAppState extends State<MyApp> {
                       child: AdaptiveDatePicker(
                         key: key2,
                         type: AdaptiveDatePickerType.adaptive,
-                        textColor: Colors.red,
                         tintColor: Colors.pink,
+                        headerForegroundColor: Colors.white,
+                        primaryColor: Color(0xFFE10078),
                         fontSize: 24,
                         initialDate: selectedDate,
                         firstDate: DateTime.now(),

@@ -19,6 +19,9 @@ class MaterialDatePicker extends StatefulWidget {
       required this.firstDate,
       required this.lastDate,
       required this.onChanged,
+      this.primaryColor,
+      this.headerBackgroundColor,
+      this.headerForegroundColor,
       this.textColor,
       this.backgroundColor,
       this.borderColor,
@@ -41,6 +44,15 @@ class MaterialDatePicker extends StatefulWidget {
 
   /// Determines whether to use Date or Time selector popups.
   final AdaptiveDatePickerMode mode;
+
+  /// The color that is used as the primary color of the picker.
+  final Color? primaryColor;
+
+  /// The color to use when painting the header of the picker.
+  final Color? headerBackgroundColor;
+
+  /// The color to use when painting the text in the header.
+  final Color? headerForegroundColor;
 
   /// The color to use when painting the text.
   final Color? textColor;
@@ -104,10 +116,32 @@ class _MaterialDatePickerState extends State<MaterialDatePicker> {
                 }
               } else {
                 var d = await showDatePicker(
-                    context: context,
-                    initialDate: date,
-                    firstDate: widget.firstDate,
-                    lastDate: widget.lastDate);
+                  context: context,
+                  initialDate: date,
+                  firstDate: widget.firstDate,
+                  lastDate: widget.lastDate,
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        colorScheme: ColorScheme.light(
+                          primary: widget.primaryColor ?? Colors.blue,
+                        ),
+                        datePickerTheme: DatePickerThemeData(
+                          headerBackgroundColor: widget.headerBackgroundColor,
+                          headerForegroundColor: widget.headerForegroundColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(widget.cornerRadius ?? 8.0),
+                            ),
+                          ),
+                          backgroundColor:
+                              widget.backgroundColor ?? Colors.white,
+                        ),
+                      ),
+                      child: child!,
+                    );
+                  },
+                );
                 if (d != null && widget.onChanged != null) {
                   setState(() => date = d);
                   widget.onChanged!(d);
