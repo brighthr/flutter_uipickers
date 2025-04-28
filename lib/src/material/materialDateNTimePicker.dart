@@ -101,85 +101,90 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
         : timeFormat.format(date);
 
     return InkWell(
-        onTap: () async {
-          if (widget.mode == AdaptiveDateNTimePickerMode.time) {
-            var t = await showTimePicker(
-              context: context,
-              initialTime: TimeOfDay(hour: date.hour, minute: date.minute),
-              builder: (context, child) {
-                var primaryLightColor = widget.primaryColor?.withOpacity(0.05);
-                return Theme(
-                  data: Theme.of(context).copyWith(
-                    timePickerTheme: TimePickerThemeData(
-                      confirmButtonStyle: ButtonStyle(
-                        foregroundColor: WidgetStatePropertyAll<Color>(
-                            widget.primaryColor ?? Colors.blue),
-                      ),
-                      cancelButtonStyle: ButtonStyle(
-                        foregroundColor: WidgetStatePropertyAll<Color>(
-                            widget.primaryColor ?? Colors.blue),
-                      ),
-                      backgroundColor: widget.backgroundColor ?? Colors.white,
-                      dialHandColor: widget.primaryColor ?? Colors.blue,
-                      dayPeriodColor: primaryLightColor,
-                      entryModeIconColor: primaryLightColor,
-                      dialBackgroundColor: primaryLightColor,
-                      hourMinuteColor: primaryLightColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(widget.cornerRadius ?? 8.0),
-                        ),
+      onTap: () async {
+        if (widget.mode == AdaptiveDateNTimePickerMode.time) {
+          var t = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay(hour: date.hour, minute: date.minute),
+            builder: (context, child) {
+              var primaryLightColor = widget.primaryColor?.withOpacity(0.05);
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  timePickerTheme: TimePickerThemeData(
+                    confirmButtonStyle: ButtonStyle(
+                      foregroundColor: WidgetStatePropertyAll<Color>(
+                          widget.primaryColor ?? Colors.blue),
+                    ),
+                    cancelButtonStyle: ButtonStyle(
+                      foregroundColor: WidgetStatePropertyAll<Color>(
+                          widget.primaryColor ?? Colors.blue),
+                    ),
+                    backgroundColor: widget.backgroundColor ?? Colors.white,
+                    dialHandColor: widget.primaryColor ?? Colors.blue,
+                    dayPeriodColor: primaryLightColor,
+                    entryModeIconColor: primaryLightColor,
+                    dialBackgroundColor: primaryLightColor,
+                    hourMinuteColor: primaryLightColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(widget.cornerRadius ?? 8.0),
                       ),
                     ),
                   ),
-                  child: child!,
-                );
-              },
-            );
-            if (t != null && widget.onChanged != null) {
-              setState(() {
-                date =
-                    DateTime(date.year, date.month, date.day, t.hour, t.minute);
-                widget.onChanged!(date);
-              });
-            }
-          } else {
-            var d = await showDatePicker(
-              context: context,
-              initialDate: date,
-              firstDate: widget.firstDate,
-              lastDate: widget.lastDate,
-              builder: (context, child) {
-                return Theme(
-                  data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.light(
-                      primary: widget.primaryColor ?? Colors.blue,
-                    ),
-                    datePickerTheme: DatePickerThemeData(
-                      headerBackgroundColor: widget.headerBackgroundColor,
-                      headerForegroundColor: widget.headerForegroundColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(widget.cornerRadius ?? 8.0),
-                        ),
-                      ),
-                      backgroundColor: widget.backgroundColor ?? Colors.white,
-                    ),
-                  ),
-                  child: child!,
-                );
-              },
-            );
-            if (d != null && widget.onChanged != null) {
-              setState(() => date = d);
-              widget.onChanged!(d);
-            }
+                ),
+                child: child!,
+              );
+            },
+          );
+          if (t != null && widget.onChanged != null) {
+            setState(() {
+              date =
+                  DateTime(date.year, date.month, date.day, t.hour, t.minute);
+              widget.onChanged!(date);
+            });
           }
-        },
-        child: widget.child ??
-            Ink(
-              color: widget.backgroundColor ?? Color(0xFFEAEAEB),
-              child: Center(child: Text(formattedText, style: textStyle)),
-            ));
+        } else {
+          var d = await showDatePicker(
+            context: context,
+            initialDate: date,
+            firstDate: widget.firstDate,
+            lastDate: widget.lastDate,
+            builder: (context, child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: widget.primaryColor ?? Colors.blue,
+                  ),
+                  datePickerTheme: DatePickerThemeData(
+                    headerBackgroundColor: widget.headerBackgroundColor,
+                    headerForegroundColor: widget.headerForegroundColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(widget.cornerRadius ?? 8.0),
+                      ),
+                    ),
+                    backgroundColor: widget.backgroundColor ?? Colors.white,
+                  ),
+                ),
+                child: child!,
+              );
+            },
+          );
+          if (d != null && widget.onChanged != null) {
+            setState(() => date = d);
+            widget.onChanged!(d);
+          }
+        }
+      },
+      child: widget.child ??
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: widget.backgroundColor ?? Colors.grey[200],
+              borderRadius: BorderRadius.circular(widget.cornerRadius ?? 8.0),
+            ),
+            child: Center(child: Text(formattedText, style: textStyle)),
+          ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uipickers/src/adaptiveDateNTimePickerMode.dart';
 import 'package:uipickers/src/cupertino/cupertinoDateNTimePicker.dart';
 import 'package:uipickers/uipickers.dart';
@@ -103,6 +104,8 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
   }
 
   InkWell _buildCupertinoDateNTimePicker(BuildContext context) {
+    final dateFormat = DateFormat('MMM dd, yyyy');
+    final timeFormat = DateFormat('hh:mm a');
     return InkWell(
       onTap: () async {
         var pickedDate = await showDialog(
@@ -122,13 +125,20 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
         }
       },
       child: child ??
-          Text(
-            mode == AdaptiveDateNTimePickerMode.time
-                ? '${initialDate.hour}:${initialDate.minute.toString().padLeft(2, '0')}'
-                : '${initialDate.day}/${initialDate.month}/${initialDate.year}',
-            style: TextStyle(
-              color: textColor,
-              fontSize: fontSize,
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: backgroundColor ?? Colors.grey[200],
+              borderRadius: BorderRadius.circular(cornerRadius ?? 8.0),
+            ),
+            child: Text(
+              mode == AdaptiveDateNTimePickerMode.time
+                  ? '${timeFormat.format(initialDate)}'
+                  : '${dateFormat.format(initialDate)}',
+              style: TextStyle(
+                color: textColor,
+                fontSize: fontSize,
+              ),
             ),
           ),
     );

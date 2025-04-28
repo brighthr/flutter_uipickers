@@ -49,29 +49,29 @@ class _MyAppState extends State<MyApp> {
                           })),
                   const SizedBox(height: 12),
                   SizedBox(
-                      width: 150,
-                      height: 34,
-                      child: AdaptiveDateNTimePicker(
-                        mode: AdaptiveDateNTimePickerMode.date,
-                        cornerRadius: Platform.isIOS ? 8 : 0,
-                        key: key2,
-                        type: AdaptiveDatePickerType.adaptive,
-                        tintColor: const Color(0xFF3399FF),
-                        headerForegroundColor: Colors.white,
-                        primaryColor: const Color(0xFF3399FF),
-                        fontSize: 24,
-                        initialDate: selectedDate,
-                        firstDate:
-                            DateTime.now().subtract(const Duration(days: 10)),
-                        lastDate: DateTime.now().add(const Duration(days: 10)),
-                        onChanged: (date) {
-                          setState(() {
-                            selectedDate = date;
-                            selectedItem =
-                                daysBetween(DateTime.now(), selectedDate);
-                          });
-                        },
-                      ))
+                    width: 200,
+                    child: AdaptiveDateNTimePicker(
+                      mode: AdaptiveDateNTimePickerMode.date,
+                      cornerRadius: Platform.isIOS ? 8 : 0,
+                      key: key2,
+                      type: AdaptiveDatePickerType.adaptive,
+                      tintColor: const Color(0xFF3399FF),
+                      headerForegroundColor: Colors.white,
+                      primaryColor: const Color(0xFF3399FF),
+                      fontSize: 24,
+                      initialDate: selectedDate,
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 10)),
+                      lastDate: DateTime.now().add(const Duration(days: 10)),
+                      onChanged: (date) {
+                        setState(() {
+                          selectedDate = date;
+                          selectedItem =
+                              daysBetween(DateTime.now(), selectedDate);
+                        });
+                      },
+                    ),
+                  )
                 ]))));
   }
 
