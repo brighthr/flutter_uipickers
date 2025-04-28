@@ -52,13 +52,13 @@ class _MyAppState extends State<MyApp> {
                       width: 150,
                       height: 34,
                       child: AdaptiveDateNTimePicker(
-                        mode: AdaptiveDatenTimePickerMode.time,
+                        mode: AdaptiveDateNTimePickerMode.date,
                         cornerRadius: Platform.isIOS ? 8 : 0,
                         key: key2,
                         type: AdaptiveDatePickerType.adaptive,
-                        tintColor: Colors.pink,
+                        tintColor: const Color(0xFF3399FF),
                         headerForegroundColor: Colors.white,
-                        primaryColor: Color(0xFFE10078),
+                        primaryColor: const Color(0xFF3399FF),
                         fontSize: 24,
                         initialDate: selectedDate,
                         firstDate:

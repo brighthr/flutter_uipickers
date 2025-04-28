@@ -10,6 +10,6 @@ export 'src/cupertino/cupertinoDateNTimePicker.dart'
     show CupertinoDateNTimePicker;
 
 export 'src/adaptivePicker.dart' show AdaptivePicker, AdaptivePickerType;
-export 'src/adaptiveDateNTimePickerMode.dart' show AdaptiveDatenTimePickerMode;
+export 'src/adaptiveDateNTimePickerMode.dart' show AdaptiveDateNTimePickerMode;
 export 'src/adaptiveDateNTimePicker.dart'
     show AdaptiveDateNTimePicker, AdaptiveDatePickerType;

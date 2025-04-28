@@ -15,7 +15,7 @@ import 'package:uipickers/uipickers.dart';
 class MaterialDateNTimePicker extends StatefulWidget {
   MaterialDateNTimePicker(
       {Key? key,
-      this.mode = AdaptiveDatenTimePickerMode.date,
+      this.mode = AdaptiveDateNTimePickerMode.date,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
@@ -49,7 +49,7 @@ class MaterialDateNTimePicker extends StatefulWidget {
   final void Function(DateTime)? onChanged;
 
   /// Determines whether to use Date or Time selector popups.
-  final AdaptiveDatenTimePickerMode mode;
+  final AdaptiveDateNTimePickerMode mode;
 
   /// The color that is used as the primary color of the picker.
   final Color? primaryColor;
@@ -96,13 +96,13 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
         fontSize: widget.fontSize ?? 17,
         fontWeight: FontWeight.w400);
 
-    final formattedText = widget.mode == AdaptiveDatenTimePickerMode.date
+    final formattedText = widget.mode == AdaptiveDateNTimePickerMode.date
         ? dateFormat.format(date)
         : timeFormat.format(date);
 
     return InkWell(
         onTap: () async {
-          if (widget.mode == AdaptiveDatenTimePickerMode.time) {
+          if (widget.mode == AdaptiveDateNTimePickerMode.time) {
             var t = await showTimePicker(
               context: context,
               initialTime: TimeOfDay(hour: date.hour, minute: date.minute),

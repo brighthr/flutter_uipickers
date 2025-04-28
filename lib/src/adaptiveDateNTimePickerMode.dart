@@ -1,1 +1,1 @@
-enum AdaptiveDatenTimePickerMode { date, time }
+enum AdaptiveDateNTimePickerMode { date, time }

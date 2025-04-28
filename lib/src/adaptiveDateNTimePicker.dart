@@ -23,7 +23,7 @@ enum AdaptiveDatePickerType { adaptive, material, cupertino }
 class AdaptiveDateNTimePicker extends StatelessWidget {
   AdaptiveDateNTimePicker(
       {Key? key,
-      this.mode = AdaptiveDatenTimePickerMode.date,
+      this.mode = AdaptiveDateNTimePickerMode.date,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
@@ -55,7 +55,7 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
   final DateTime lastDate;
 
   /// Determines whether to use Date or Time selector popups.
-  final AdaptiveDatenTimePickerMode mode;
+  final AdaptiveDateNTimePickerMode mode;
 
   /// Called when the user selects a date/time.
   final void Function(DateTime)? onChanged;
@@ -109,8 +109,8 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return CupertinoDateNTimePicker(
-              datePickerOnly: mode == AdaptiveDatenTimePickerMode.date,
-              timePickerOnly: mode == AdaptiveDatenTimePickerMode.time,
+              datePickerOnly: mode == AdaptiveDateNTimePickerMode.date,
+              timePickerOnly: mode == AdaptiveDateNTimePickerMode.time,
               initialDate: initialDate,
               selectedColor: primaryColor,
               iconColor: primaryColor,
@@ -123,7 +123,7 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
       },
       child: child ??
           Text(
-            mode == AdaptiveDatenTimePickerMode.time
+            mode == AdaptiveDateNTimePickerMode.time
                 ? '${initialDate.hour}:${initialDate.minute.toString().padLeft(2, '0')}'
                 : '${initialDate.day}/${initialDate.month}/${initialDate.year}',
             style: TextStyle(
