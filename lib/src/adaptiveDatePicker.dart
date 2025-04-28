@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:uipickers/src/cupertino/cupertinoDateNTimePicker.dart';
 import 'uidatepicker.dart';
-import 'materialDatePicker.dart';
+import 'material/materialDateNTimePicker.dart';
 import 'adaptiveDatePickerMode.dart';
 
 enum AdaptiveDatePickerType { adaptive, material, cupertino }
@@ -37,8 +38,13 @@ class AdaptiveDatePicker extends StatelessWidget {
       this.cornerRadius,
       this.headerForegroundColor,
       this.primaryColor,
+      this.child,
       this.fontSize})
       : super(key: key);
+
+  /// A child widget that displays the selected date or time.
+  /// This widget is used to encapsulate the display logic for the picker.
+  final Widget? child;
 
   /// The initially selected date. It must either fall between these dates, or be equal to one of them.
   final DateTime initialDate;
@@ -92,17 +98,50 @@ class AdaptiveDatePicker extends StatelessWidget {
     var t = type ?? AdaptiveDatePickerType.adaptive;
     if (t != AdaptiveDatePickerType.material &&
         theme.platform == TargetPlatform.iOS) {
-      return _buildCupertinoNativeDatePicker();
+      return _buildCupertinoDateNTimePicker(context);
     }
-    return _buildMaterialDatePicker(context);
+    return _buildMaterialDateNTimePicker(context);
   }
 
-  Widget _buildMaterialDatePicker(BuildContext context) {
-    return MaterialDatePicker(
+  InkWell _buildCupertinoDateNTimePicker(BuildContext context) {
+    return InkWell(
+      onTap: () async {
+        var pickedDate = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoDateNTimePicker(
+              datePickerOnly: mode == AdaptiveDatePickerMode.date,
+              timePickerOnly: mode == AdaptiveDatePickerMode.time,
+              initialDate: initialDate,
+              selectedColor: primaryColor,
+              iconColor: primaryColor,
+            );
+          },
+        );
+        if (pickedDate != null) {
+          _onChanged(pickedDate);
+        }
+      },
+      child: child ??
+          Text(
+            mode == AdaptiveDatePickerMode.time
+                ? '${initialDate.hour}:${initialDate.minute.toString().padLeft(2, '0')}'
+                : '${initialDate.day}/${initialDate.month}/${initialDate.year}',
+            style: TextStyle(
+              color: textColor,
+              fontSize: fontSize,
+            ),
+          ),
+    );
+  }
+
+  Widget _buildMaterialDateNTimePicker(BuildContext context) {
+    return MaterialDateNTimePicker(
+      child: child,
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
-      onChanged: onChanged,
+      onChanged: _onChanged,
       mode: mode,
       textColor: textColor,
       backgroundColor: backgroundColor,
@@ -116,21 +155,9 @@ class AdaptiveDatePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildCupertinoNativeDatePicker() {
-    return UIDatePicker(
-        mode: mode == AdaptiveDatePickerMode.date
-            ? UIDatePickerMode.date
-            : UIDatePickerMode.time,
-        date: initialDate,
-        minimumDate: firstDate,
-        maximumDate: lastDate,
-        onChanged: onChanged,
-        textColor: textColor,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-        borderWidth: borderWidth,
-        cornerRadius: cornerRadius,
-        fontSize: fontSize,
-        tintColor: tintColor);
+  void _onChanged(DateTime date) {
+    if (date != initialDate && onChanged != null) {
+      onChanged!(date);
+    }
   }
 }

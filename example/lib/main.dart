@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:uipickers/uipickers.dart';
 
@@ -50,6 +52,8 @@ class _MyAppState extends State<MyApp> {
                       width: 150,
                       height: 34,
                       child: AdaptiveDatePicker(
+                        mode: AdaptiveDatePickerMode.time,
+                        cornerRadius: Platform.isIOS ? 8 : 0,
                         key: key2,
                         type: AdaptiveDatePickerType.adaptive,
                         tintColor: Colors.pink,
@@ -57,7 +61,8 @@ class _MyAppState extends State<MyApp> {
                         primaryColor: Color(0xFFE10078),
                         fontSize: 24,
                         initialDate: selectedDate,
-                        firstDate: DateTime.now(),
+                        firstDate:
+                            DateTime.now().subtract(const Duration(days: 10)),
                         lastDate: DateTime.now().add(const Duration(days: 10)),
                         onChanged: (date) {
                           setState(() {

@@ -1,7 +1,7 @@
-import 'package:adoptive_calendar/src/time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uipickers/src/cupertino/cupertinoTimePicker.dart';
 
 import '../constants.dart';
 import 'monthYearPicker.dart';
@@ -64,6 +64,9 @@ class CupertinoDateNTimePicker extends StatefulWidget {
   /// Month Year Order
   final DatePickerDateOrder? monthYearOrder;
 
+  /// Whether to open the time picker directly.
+  final bool timePickerOnly;
+
   /// Creates an instance of [CupertinoDateNTimePicker].
   ///
   /// The [initialDate] is required and represents the date to be initially
@@ -91,6 +94,7 @@ class CupertinoDateNTimePicker extends StatefulWidget {
     this.disablePastDates = false,
     this.monthYearMode = CupertinoDatePickerMode.monthYear,
     this.monthYearOrder,
+    this.timePickerOnly = false,
   })  : assert(!(datePickerOnly && minuteInterval > 1),
             'You cannot use minuteInterval when datePickerOnly is true. If you want to use minuteInterval then remove datePickerOnly'),
         assert(!(datePickerOnly && use24hFormat),
@@ -122,8 +126,8 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
     /// Set [isYearSelected] to false to indicate that a year has not been selected yet.
     isYearSelected = false;
 
-    /// Set [isTimeSelected] to false to indicate that a time has not been selected yet.
-    isTimeSelected = false;
+    /// Set [isTimeSelected] to the value of [timePickerOnly] to indicate whether to open time picker directly.
+    isTimeSelected = widget.timePickerOnly;
 
     /// Determine whether it is AM or PM based on the initial hour of the [_selectedDate].
     isAM = _selectedDate!.hour < 12;

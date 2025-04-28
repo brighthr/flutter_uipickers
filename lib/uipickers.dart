@@ -6,7 +6,7 @@ export 'src/uipicker.dart' show UIPicker, PickerTextAlignment;
 export 'src/uidatepicker.dart' show UIDatePicker, UIDatePickerMode;
 
 export 'src/materialPicker.dart' show MaterialPicker;
-export 'src/materialDatePicker.dart' show MaterialDatePicker;
+export 'src/material/materialDateNTimePicker.dart' show MaterialDateNTimePicker;
 
 export 'src/adaptivePicker.dart' show AdaptivePicker, AdaptivePickerType;
 export 'src/adaptiveDatePickerMode.dart' show AdaptiveDatePickerMode;
