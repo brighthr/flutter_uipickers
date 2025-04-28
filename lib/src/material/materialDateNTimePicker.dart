@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../adaptiveDatePickerMode.dart';
+import 'package:uipickers/src/adaptiveDateNTimePickerMode.dart';
+import 'package:uipickers/uipickers.dart';
 
 /// A material widget for selecting a date or time.
 ///
@@ -14,7 +15,7 @@ import '../adaptiveDatePickerMode.dart';
 class MaterialDateNTimePicker extends StatefulWidget {
   MaterialDateNTimePicker(
       {Key? key,
-      this.mode = AdaptiveDatePickerMode.date,
+      this.mode = AdaptiveDatenTimePickerMode.date,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
@@ -48,7 +49,7 @@ class MaterialDateNTimePicker extends StatefulWidget {
   final void Function(DateTime)? onChanged;
 
   /// Determines whether to use Date or Time selector popups.
-  final AdaptiveDatePickerMode mode;
+  final AdaptiveDatenTimePickerMode mode;
 
   /// The color that is used as the primary color of the picker.
   final Color? primaryColor;
@@ -95,13 +96,13 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
         fontSize: widget.fontSize ?? 17,
         fontWeight: FontWeight.w400);
 
-    final formattedText = widget.mode == AdaptiveDatePickerMode.date
+    final formattedText = widget.mode == AdaptiveDatenTimePickerMode.date
         ? dateFormat.format(date)
         : timeFormat.format(date);
 
     return InkWell(
         onTap: () async {
-          if (widget.mode == AdaptiveDatePickerMode.time) {
+          if (widget.mode == AdaptiveDatenTimePickerMode.time) {
             var t = await showTimePicker(
               context: context,
               initialTime: TimeOfDay(hour: date.hour, minute: date.minute),

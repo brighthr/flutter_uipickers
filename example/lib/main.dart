@@ -51,8 +51,8 @@ class _MyAppState extends State<MyApp> {
                   SizedBox(
                       width: 150,
                       height: 34,
-                      child: AdaptiveDatePicker(
-                        mode: AdaptiveDatePickerMode.time,
+                      child: AdaptiveDateNTimePicker(
+                        mode: AdaptiveDatenTimePickerMode.time,
                         cornerRadius: Platform.isIOS ? 8 : 0,
                         key: key2,
                         type: AdaptiveDatePickerType.adaptive,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:uipickers/src/adaptiveDateNTimePickerMode.dart';
 import 'package:uipickers/src/cupertino/cupertinoDateNTimePicker.dart';
-import 'uidatepicker.dart';
-import 'material/materialDateNTimePicker.dart';
-import 'adaptiveDatePickerMode.dart';
+import 'package:uipickers/uipickers.dart';
 
 enum AdaptiveDatePickerType { adaptive, material, cupertino }
 
@@ -21,10 +20,10 @@ enum AdaptiveDatePickerType { adaptive, material, cupertino }
 /// picker's value. It should also call [State.setState] to rebuild the
 /// picker with the new value.
 ///
-class AdaptiveDatePicker extends StatelessWidget {
-  AdaptiveDatePicker(
+class AdaptiveDateNTimePicker extends StatelessWidget {
+  AdaptiveDateNTimePicker(
       {Key? key,
-      this.mode = AdaptiveDatePickerMode.date,
+      this.mode = AdaptiveDatenTimePickerMode.date,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
@@ -56,7 +55,7 @@ class AdaptiveDatePicker extends StatelessWidget {
   final DateTime lastDate;
 
   /// Determines whether to use Date or Time selector popups.
-  final AdaptiveDatePickerMode mode;
+  final AdaptiveDatenTimePickerMode mode;
 
   /// Called when the user selects a date/time.
   final void Function(DateTime)? onChanged;
@@ -110,8 +109,8 @@ class AdaptiveDatePicker extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return CupertinoDateNTimePicker(
-              datePickerOnly: mode == AdaptiveDatePickerMode.date,
-              timePickerOnly: mode == AdaptiveDatePickerMode.time,
+              datePickerOnly: mode == AdaptiveDatenTimePickerMode.date,
+              timePickerOnly: mode == AdaptiveDatenTimePickerMode.time,
               initialDate: initialDate,
               selectedColor: primaryColor,
               iconColor: primaryColor,
@@ -124,7 +123,7 @@ class AdaptiveDatePicker extends StatelessWidget {
       },
       child: child ??
           Text(
-            mode == AdaptiveDatePickerMode.time
+            mode == AdaptiveDatenTimePickerMode.time
                 ? '${initialDate.hour}:${initialDate.minute.toString().padLeft(2, '0')}'
                 : '${initialDate.day}/${initialDate.month}/${initialDate.year}',
             style: TextStyle(
