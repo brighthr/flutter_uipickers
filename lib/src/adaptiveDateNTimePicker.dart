@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:uipickers/src/adaptiveDateNTimePickerMode.dart';
-import 'package:uipickers/src/cupertino/cupertinoDateNTimePicker.dart';
 import 'package:uipickers/uipickers.dart';
 
 enum AdaptiveDatePickerType { adaptive, material, cupertino }
@@ -114,6 +112,8 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
             return CupertinoDateNTimePicker(
               datePickerOnly: mode == AdaptiveDateNTimePickerMode.date,
               timePickerOnly: mode == AdaptiveDateNTimePickerMode.time,
+              firstDate: firstDate,
+              lastDate: lastDate,
               initialDate: initialDate,
               selectedColor: primaryColor,
               iconColor: primaryColor,

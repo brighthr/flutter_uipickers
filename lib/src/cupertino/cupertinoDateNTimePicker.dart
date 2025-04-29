@@ -4,11 +4,17 @@ import 'package:flutter/services.dart';
 import 'package:uipickers/src/cupertino/cupertinoTimePicker.dart';
 
 import '../constants.dart';
-import 'monthYearPicker.dart';
+import 'datePicker.dart';
 
 class CupertinoDateNTimePicker extends StatefulWidget {
   /// The initial date for the calendar.
   final DateTime initialDate;
+
+  /// The earliest allowable date.
+  final DateTime firstDate;
+
+  /// The latest allowable date.
+  final DateTime lastDate;
 
   /// The background color of the calendar.
   final Color? backgroundColor;
@@ -76,6 +82,8 @@ class CupertinoDateNTimePicker extends StatefulWidget {
   const CupertinoDateNTimePicker({
     super.key,
     required this.initialDate,
+    required this.firstDate,
+    required this.lastDate,
     this.backgroundColor,
     this.minYear,
     this.maxYear,
@@ -187,6 +195,8 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
               dateOrder: widget.monthYearOrder,
               minYear: widget.minYear,
               maxYear: widget.maxYear,
+              firstDate: widget.firstDate,
+              lastDate: widget.lastDate,
               initialDateTime: _selectedDate!,
               fontColor: widget.fontColor,
               onMonthYearChanged: (value) {

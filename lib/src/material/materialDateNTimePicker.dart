@@ -178,12 +178,21 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
       },
       child: widget.child ??
           Container(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
             decoration: BoxDecoration(
-              color: widget.backgroundColor ?? Colors.grey[200],
+              color: widget.textColor ?? Colors.grey[200],
               borderRadius: BorderRadius.circular(widget.cornerRadius ?? 8.0),
             ),
-            child: Center(child: Text(formattedText, style: textStyle)),
+            child: Center(
+              child: Text(
+                formattedText,
+                style: textStyle.copyWith(
+                  color: widget.primaryColor ?? Colors.blue,
+                  fontSize: widget.fontSize,
+                ),
+              ),
+            ),
           ),
     );
   }
