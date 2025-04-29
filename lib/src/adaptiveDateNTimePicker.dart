@@ -126,18 +126,21 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
       },
       child: child ??
           Container(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
             decoration: BoxDecoration(
               color: backgroundColor ?? Colors.grey[200],
               borderRadius: BorderRadius.circular(cornerRadius ?? 8.0),
             ),
-            child: Text(
-              mode == AdaptiveDateNTimePickerMode.time
-                  ? '${timeFormat.format(initialDate)}'
-                  : '${dateFormat.format(initialDate)}',
-              style: TextStyle(
-                color: textColor,
-                fontSize: fontSize,
+            child: Center(
+              child: Text(
+                mode == AdaptiveDateNTimePickerMode.time
+                    ? '${timeFormat.format(initialDate)}'
+                    : '${dateFormat.format(initialDate)}',
+                style: TextStyle(
+                  color: primaryColor ?? Colors.blue,
+                  fontSize: fontSize,
+                ),
               ),
             ),
           ),

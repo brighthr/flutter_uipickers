@@ -181,7 +181,7 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
             decoration: BoxDecoration(
-              color: widget.textColor ?? Colors.grey[200],
+              color: widget.backgroundColor ?? Colors.grey[200],
               borderRadius: BorderRadius.circular(widget.cornerRadius ?? 8.0),
             ),
             child: Center(
