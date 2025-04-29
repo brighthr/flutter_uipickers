@@ -195,8 +195,6 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
               dateOrder: widget.monthYearOrder,
               minYear: widget.minYear,
               maxYear: widget.maxYear,
-              firstDate: widget.firstDate,
-              lastDate: widget.lastDate,
               initialDateTime: _selectedDate!,
               fontColor: widget.fontColor,
               onMonthYearChanged: (value) {
@@ -207,7 +205,6 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
                 }
                 _selectedDate = DateTime(value.year, value.month, days,
                     _selectedDate!.hour, _selectedDate!.minute);
-                returnDate = _selectedDate;
                 if (widget.onSelection != null) {
                   widget.onSelection!(returnDate);
                 }
@@ -301,7 +298,11 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
                                 currentDate.isAfter(widget.initialDate
                                     .subtract(const Duration(days: 1))) ||
                                 currentDate
-                                    .isAtSameMomentAs(widget.initialDate));
+                                    .isAtSameMomentAs(widget.initialDate)) &&
+                            currentDate.isAfter(widget.firstDate
+                                .subtract(const Duration(days: 1))) &&
+                            currentDate.isBefore(
+                                widget.lastDate.add(const Duration(days: 1)));
 
                         // Determine the color of the date
                         Color? textColor = day <= 0 ||
@@ -360,19 +361,22 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
                                       : Colors.transparent,
                               shape: BoxShape.circle,
                             ),
-                            child: Text(
-                              day <= 0 ||
-                                      day >
-                                          DateTime(_selectedDate!.year,
-                                                  _selectedDate!.month + 1, 0)
-                                              .day
-                                  ? ''
-                                  : '$day',
-                              style: TextStyle(
-                                fontWeight: _isSelectedDay(day)
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
-                                color: textColor,
+                            child: Opacity(
+                              opacity: isSelectable ? 1.0 : 0.4,
+                              child: Text(
+                                day <= 0 ||
+                                        day >
+                                            DateTime(_selectedDate!.year,
+                                                    _selectedDate!.month + 1, 0)
+                                                .day
+                                    ? ''
+                                    : '$day',
+                                style: TextStyle(
+                                  fontWeight: _isSelectedDay(day)
+                                      ? FontWeight.w600
+                                      : FontWeight.normal,
+                                  color: textColor,
+                                ),
                               ),
                             ),
                           ),
@@ -759,10 +763,7 @@ class _CupertinoDateNTimePickerState extends State<CupertinoDateNTimePicker> {
     setState(() {
       _selectedDate = DateTime(
           year, month, selectedDay, _selectedDate!.hour, _selectedDate!.minute);
-      returnDate = _selectedDate;
-      if (widget.onSelection != null) {
-        widget.onSelection!(returnDate);
-      }
+
       _resetIfBeforeCurrentDate();
     });
   }
