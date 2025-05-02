@@ -42,6 +42,9 @@ class _MyAppState extends State<MyApp> {
               cancelButtonStyle: ButtonStyle(
                 foregroundColor: WidgetStateProperty.all(primaryColor),
               ),
+            ),
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor: Colors.white,
             )),
         home: Scaffold(
             body: Padding(
@@ -74,9 +77,6 @@ class _MyAppState extends State<MyApp> {
                       cornerRadius: Platform.isIOS ? 8 : 0,
                       key: key2,
                       type: AdaptiveDatePickerType.adaptive,
-                      tintColor: primaryColor,
-                      headerForegroundColor: Colors.white,
-                      primaryColor: primaryColor,
                       fontSize: 24,
                       initialDate: selectedDate,
                       firstDate:
@@ -85,6 +85,26 @@ class _MyAppState extends State<MyApp> {
                       onChanged: (date) {
                         setState(() {
                           selectedDate = date;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: 200,
+                    child: AdaptiveDateNTimePicker(
+                      mode: AdaptiveDateNTimePickerMode.time,
+                      cornerRadius: Platform.isIOS ? 8 : 0,
+                      key: GlobalKey(),
+                      type: AdaptiveDatePickerType.adaptive,
+                      fontSize: 24,
+                      initialDate: selectedDate,
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 10)),
+                      lastDate: DateTime.now().add(const Duration(days: 10)),
+                      onChanged: (time) {
+                        setState(() {
+                          selectedDate = time;
                         });
                       },
                     ),
