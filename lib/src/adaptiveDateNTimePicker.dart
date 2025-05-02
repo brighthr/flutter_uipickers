@@ -157,11 +157,7 @@ class AdaptiveDateNTimePicker extends StatelessWidget {
       mode: mode,
       textColor: textColor,
       backgroundColor: backgroundColor,
-      borderColor: borderColor,
-      borderWidth: borderWidth,
       cornerRadius: cornerRadius,
-      headerBackgroundColor: primaryColor,
-      headerForegroundColor: headerForegroundColor,
       primaryColor: primaryColor,
       fontSize: fontSize,
     );

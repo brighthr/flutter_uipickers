@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:uipickers/uipickers.dart';
 
+const Color primaryColor = Color(0xFF3399FF);
+
 void main() {
   runApp(const MyApp());
 }
@@ -24,6 +26,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+            useMaterial3: true,
+            primaryColor: primaryColor,
+            colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.blue,
+                brightness: Brightness.light,
+                accentColor: primaryColor),
+            buttonTheme: ButtonThemeData(
+                buttonColor: primaryColor, textTheme: ButtonTextTheme.primary),
+            datePickerTheme: DatePickerThemeData(
+              confirmButtonStyle: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(primaryColor),
+              ),
+              cancelButtonStyle: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(primaryColor),
+              ),
+            )),
         home: Scaffold(
             body: Padding(
                 padding: const EdgeInsets.fromLTRB(100, 140, 20, 20),
@@ -55,9 +74,9 @@ class _MyAppState extends State<MyApp> {
                       cornerRadius: Platform.isIOS ? 8 : 0,
                       key: key2,
                       type: AdaptiveDatePickerType.adaptive,
-                      tintColor: const Color(0xFF3399FF),
+                      tintColor: primaryColor,
                       headerForegroundColor: Colors.white,
-                      primaryColor: const Color(0xFF3399FF),
+                      primaryColor: primaryColor,
                       fontSize: 24,
                       initialDate: selectedDate,
                       firstDate:
@@ -66,8 +85,6 @@ class _MyAppState extends State<MyApp> {
                       onChanged: (date) {
                         setState(() {
                           selectedDate = date;
-                          selectedItem =
-                              daysBetween(DateTime.now(), selectedDate);
                         });
                       },
                     ),

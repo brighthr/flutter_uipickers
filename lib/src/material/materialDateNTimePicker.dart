@@ -22,12 +22,8 @@ class MaterialDateNTimePicker extends StatefulWidget {
       required this.onChanged,
       this.child,
       this.primaryColor,
-      this.headerBackgroundColor,
-      this.headerForegroundColor,
       this.textColor,
       this.backgroundColor,
-      this.borderColor,
-      this.borderWidth,
       this.cornerRadius,
       this.fontSize})
       : super(key: key);
@@ -54,23 +50,11 @@ class MaterialDateNTimePicker extends StatefulWidget {
   /// The color that is used as the primary color of the picker.
   final Color? primaryColor;
 
-  /// The color to use when painting the header of the picker.
-  final Color? headerBackgroundColor;
-
-  /// The color to use when painting the text in the header.
-  final Color? headerForegroundColor;
-
   /// The color to use when painting the text.
   final Color? textColor;
 
   /// The color to fill in the background of the picker.
   final Color? backgroundColor;
-
-  /// The color to use when painting the bordr of the picker.
-  final Color? borderColor;
-
-  /// The border width.
-  final double? borderWidth;
 
   /// The corner radius.
   final double? cornerRadius;
@@ -149,26 +133,6 @@ class _MaterialDateNTimePickerState extends State<MaterialDateNTimePicker> {
             initialDate: date,
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
-            builder: (context, child) {
-              return Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.light(
-                    primary: widget.primaryColor ?? Colors.blue,
-                  ),
-                  datePickerTheme: DatePickerThemeData(
-                    headerBackgroundColor: widget.headerBackgroundColor,
-                    headerForegroundColor: widget.headerForegroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(widget.cornerRadius ?? 8.0),
-                      ),
-                    ),
-                    backgroundColor: widget.backgroundColor ?? Colors.white,
-                  ),
-                ),
-                child: child!,
-              );
-            },
           );
           if (d != null && widget.onChanged != null) {
             setState(() => date = d);
