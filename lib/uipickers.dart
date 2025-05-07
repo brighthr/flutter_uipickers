@@ -3,12 +3,13 @@
 // found in the LICENSE file.
 
 export 'src/uipicker.dart' show UIPicker, PickerTextAlignment;
-export 'src/uidatepicker.dart' show UIDatePicker, UIDatePickerMode;
 
 export 'src/materialPicker.dart' show MaterialPicker;
-export 'src/materialDatePicker.dart' show MaterialDatePicker;
+export 'src/material/materialDateNTimePicker.dart' show MaterialDateNTimePicker;
+export 'src/cupertino/cupertinoDateNTimePicker.dart'
+    show CupertinoDateNTimePicker;
 
 export 'src/adaptivePicker.dart' show AdaptivePicker, AdaptivePickerType;
-export 'src/adaptiveDatePickerMode.dart' show AdaptiveDatePickerMode;
-export 'src/adaptiveDatePicker.dart'
-    show AdaptiveDatePicker, AdaptiveDatePickerType;
+export 'src/adaptiveDateNTimePickerMode.dart' show AdaptiveDateNTimePickerMode;
+export 'src/adaptiveDateNTimePicker.dart'
+    show AdaptiveDateNTimePicker, AdaptiveDatePickerType;

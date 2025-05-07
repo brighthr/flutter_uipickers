@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:uipickers/uipickers.dart';
+
+const Color primaryColor = Color(0xFF3399FF);
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +26,26 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+            useMaterial3: true,
+            primaryColor: primaryColor,
+            colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.blue,
+                brightness: Brightness.light,
+                accentColor: primaryColor),
+            buttonTheme: ButtonThemeData(
+                buttonColor: primaryColor, textTheme: ButtonTextTheme.primary),
+            datePickerTheme: DatePickerThemeData(
+              confirmButtonStyle: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(primaryColor),
+              ),
+              cancelButtonStyle: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(primaryColor),
+              ),
+            ),
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor: Colors.white,
+            )),
         home: Scaffold(
             body: Padding(
                 padding: const EdgeInsets.fromLTRB(100, 140, 20, 20),
@@ -47,25 +71,44 @@ class _MyAppState extends State<MyApp> {
                           })),
                   const SizedBox(height: 12),
                   SizedBox(
-                      width: 150,
-                      height: 34,
-                      child: AdaptiveDatePicker(
-                        key: key2,
-                        type: AdaptiveDatePickerType.adaptive,
-                        textColor: Colors.red,
-                        tintColor: Colors.pink,
-                        fontSize: 24,
-                        initialDate: selectedDate,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(const Duration(days: 10)),
-                        onChanged: (date) {
-                          setState(() {
-                            selectedDate = date;
-                            selectedItem =
-                                daysBetween(DateTime.now(), selectedDate);
-                          });
-                        },
-                      ))
+                    width: 200,
+                    child: AdaptiveDateNTimePicker(
+                      mode: AdaptiveDateNTimePickerMode.date,
+                      cornerRadius: Platform.isIOS ? 8 : 0,
+                      key: key2,
+                      type: AdaptiveDatePickerType.adaptive,
+                      fontSize: 24,
+                      initialDate: selectedDate,
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 10)),
+                      lastDate: DateTime.now().add(const Duration(days: 10)),
+                      onChanged: (date) {
+                        setState(() {
+                          selectedDate = date;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: 200,
+                    child: AdaptiveDateNTimePicker(
+                      mode: AdaptiveDateNTimePickerMode.time,
+                      cornerRadius: Platform.isIOS ? 8 : 0,
+                      key: GlobalKey(),
+                      type: AdaptiveDatePickerType.adaptive,
+                      fontSize: 24,
+                      initialDate: selectedDate,
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 10)),
+                      lastDate: DateTime.now().add(const Duration(days: 10)),
+                      onChanged: (time) {
+                        setState(() {
+                          selectedDate = time;
+                        });
+                      },
+                    ),
+                  )
                 ]))));
   }
 
