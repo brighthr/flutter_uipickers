@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Added iOS Swift Package Manager support.
+
 ## 1.1.1
 
 ### Updates

@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'uipickers'
-  s.version          = '0.0.1'
+  s.version          = '1.1.2'
   s.summary          = 'Exposes native iOS UIKit UIDatePicker and SwiftUI Picker controls to Flutter.'
   s.description      = <<-DESC
   Exposes native iOS UIKit UIDatePicker and SwiftUI Picker controls to Flutter.
